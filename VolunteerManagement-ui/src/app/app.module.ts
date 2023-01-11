@@ -51,6 +51,7 @@ import { TopNavComponent } from './layout/top-nav/top-nav.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     VolunteersComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

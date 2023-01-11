@@ -1,3 +1,17 @@
 table {
   width: 100%;
 }
+.search-input{
+  outline: none;
+  border: 2px solid #DDD;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration-color: solid black;
+}
+.search-input:active{
+  border:1px solid #BBB;
+}
+
+.search-input:focus{
+  border:1px solid #AAA;
+}
