@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Volunteer } from '../models/ui-modules/Volunteer.Model';
+import { MatTableDataSource } from '@angular/material/table';
+import { Volunteer } from '../models/ui-modules/volunteer.Model';
 import { VolunteerService } from './volunteer.service';
 
 @Component({
@@ -10,13 +11,18 @@ import { VolunteerService } from './volunteer.service';
 export class VolunteersComponent  implements OnInit{
 
   volunteers : Volunteer[]=[];
+  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'phoneNumber', 'gender'];
+
+  dataSource : MatTableDataSource<Volunteer> =  new MatTableDataSource<Volunteer>();
+
   constructor(private volunteerService : VolunteerService){}
 
   //getListOfStudents
   ngOnInit(): void {
     this.volunteerService.getVolunteers().subscribe(
       (succesResponse) => {
-        console.log(succesResponse[0].firstName)
+        this.volunteers = succesResponse;
+        this.dataSource = new MatTableDataSource<Volunteer>(this.volunteers);
       },
       (errorResponse) => {
         console.log(errorResponse)
