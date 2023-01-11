@@ -46,9 +46,17 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
+import { TopNavComponent } from './layout/top-nav/top-nav.component';
+
+import { VolunteersComponent } from './volunteers/volunteers.component';
+
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopNavComponent,
+    VolunteersComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +98,8 @@ MatSnackBarModule,
 MatTooltipModule,
 MatPaginatorModule,
 MatSortModule,
-MatTableModule
+MatTableModule,
+HttpClientModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
