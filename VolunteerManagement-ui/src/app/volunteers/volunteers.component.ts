@@ -13,7 +13,7 @@ import { VolunteerService } from './volunteer.service';
 export class VolunteersComponent  implements OnInit{
 
   volunteers : Volunteer[]=[];
-  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'phoneNumber', 'gender'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'phoneNumber', 'gender', 'edit'];
 
   dataSource : MatTableDataSource<Volunteer> =  new MatTableDataSource<Volunteer>();
 

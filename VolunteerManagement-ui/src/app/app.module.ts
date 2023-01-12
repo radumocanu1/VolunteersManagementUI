@@ -52,12 +52,14 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
-    VolunteersComponent
+    VolunteersComponent,
+    ViewVolunteerComponent
   ],
   imports: [
     FormsModule,

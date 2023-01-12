@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 
 const routes: Routes = [
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: 'volunteers',
     component: VolunteersComponent
+  },
+  {
+    path: 'volunteers/:id',
+    component: ViewVolunteerComponent
   }
 ];
 

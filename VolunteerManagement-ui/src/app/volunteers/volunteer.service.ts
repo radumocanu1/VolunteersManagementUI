@@ -14,4 +14,7 @@ export class VolunteerService {
   getVolunteers(): Observable<Volunteer[]>{
     return this.httpClient.get<Volunteer[]>(this.baseApiUrl + '/volunteers')
   }
+  getVolunteer(volunteerId: string): Observable<Volunteer>{
+    return this.httpClient.get<Volunteer>(this.baseApiUrl + '/volunteers/' + volunteerId)
+  }
 }
