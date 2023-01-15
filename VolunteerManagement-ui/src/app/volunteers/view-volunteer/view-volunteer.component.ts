@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Gender } from 'src/app/models/ui-modules/gender.model';
-import { Volunteer } from 'src/app/models/ui-modules/volunteer.Model';
+import { VolunteerUI } from 'src/app/models/ui-modules/volunteerUI.model';
 import { GenderService } from 'src/app/services/gender.service';
 import { VolunteerService } from '../volunteer.service';
 
@@ -13,13 +14,13 @@ import { VolunteerService } from '../volunteer.service';
 export class ViewVolunteerComponent implements OnInit {
 
   volunteerId: string | null | undefined;
-  volunteer: Volunteer = {
+  volunteer: VolunteerUI = {
     id: '',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
     email: '',
-    phoneNumber: 0,
+    phoneNumber: '',
     gender:{
       id: '',
       description:''
@@ -30,7 +31,8 @@ export class ViewVolunteerComponent implements OnInit {
   genderList: Gender[] = [];
   constructor(private readonly volunteerService: VolunteerService,
     private readonly route: ActivatedRoute,
-    private readonly genderService: GenderService  ) {}
+    private readonly genderService: GenderService,
+    private snackbar: MatSnackBar  ) {}
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       (params) =>{
@@ -40,6 +42,7 @@ export class ViewVolunteerComponent implements OnInit {
           .subscribe(
             (succesResponse) => {
               this.volunteer = succesResponse;
+              console.log(succesResponse);
             }
           );
           this.genderService.getGenderList()
@@ -55,6 +58,19 @@ export class ViewVolunteerComponent implements OnInit {
 
 
   }
-
+  onUpdate(): void{
+    this.volunteerService.updateVolunteer(this.volunteer.id, this.volunteer)
+    .subscribe(
+      (succesResponse) => {
+          this.snackbar.open('Volunteer updated succesfully!', undefined, {
+            duration: 2000
+          });
+          console.log(succesResponse);
+      },
+      (errorResponse) => {
+        console.log(errorResponse);
+      }
+    );
+  }
 
 }

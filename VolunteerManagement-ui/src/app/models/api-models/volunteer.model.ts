@@ -8,7 +8,7 @@ export interface Volunteer{
   email: string,
   dateOfBirth: string,
   profileImageUrl: string,
-  phoneNumber: number,
+  phoneNumber: string,
   gender: Gender,
   genderId: string,
   Address: Address

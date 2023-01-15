@@ -1,13 +1,13 @@
 import { Gender } from "../api-models/gender.model";
 
 
-export interface Volunteer{
+export interface VolunteerUI{
   id: string,
   firstName: string,
   lastName: string,
   email: string,
   dateOfBirth: string,
   profileImageUrl: string,
-  phoneNumber: number,
+  phoneNumber: string,
   gender: Gender
 }

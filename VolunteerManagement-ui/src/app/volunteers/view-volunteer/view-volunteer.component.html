@@ -62,7 +62,7 @@
           <div class="col-xs-6">
             <mat-form-field class="field" appearance="outline">
               <mat-label> PhoneNumber </mat-label>
-              <input type="number" matInput matInput [(ngModel)] = "volunteer.phoneNumber" name="phoneNumber">
+              <input type="text" matInput matInput [(ngModel)] = "volunteer.phoneNumber" name="phoneNumber">
             </mat-form-field>
           </div>
 
@@ -82,6 +82,11 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button mat-raised-button color ="primary" (click)="onUpdate()">Update Volunteer</button>
           </div>
         </div>
       </form>

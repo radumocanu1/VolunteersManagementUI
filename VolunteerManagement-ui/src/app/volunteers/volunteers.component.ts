@@ -2,20 +2,21 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Volunteer } from '../models/ui-modules/volunteer.Model';
+import { VolunteerUI } from '../models/ui-modules/volunteerUI.model';
 import { VolunteerService } from './volunteer.service';
 
 @Component({
   selector: 'app-volunteers',
   templateUrl: './volunteers.component.html',
+
   styleUrls: ['./volunteers.component.css']
 })
 export class VolunteersComponent  implements OnInit{
 
-  volunteers : Volunteer[]=[];
+  volunteers : VolunteerUI[]=[];
   displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'phoneNumber', 'gender', 'edit'];
 
-  dataSource : MatTableDataSource<Volunteer> =  new MatTableDataSource<Volunteer>();
+  dataSource : MatTableDataSource<VolunteerUI> =  new MatTableDataSource<VolunteerUI>();
 
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
@@ -28,7 +29,7 @@ export class VolunteersComponent  implements OnInit{
     this.volunteerService.getVolunteers().subscribe(
       (succesResponse) => {
         this.volunteers = succesResponse;
-        this.dataSource = new MatTableDataSource<Volunteer>(this.volunteers);
+        this.dataSource = new MatTableDataSource<VolunteerUI>(this.volunteers);
         if (this.matPaginator){
           this.dataSource.paginator = this.matPaginator;
         }
