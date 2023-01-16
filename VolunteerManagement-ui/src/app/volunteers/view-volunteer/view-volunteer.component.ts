@@ -1,6 +1,8 @@
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { addVolunteerUI } from 'src/app/models/ui-modules/add-volunteer.model';
 import { Gender } from 'src/app/models/ui-modules/gender.model';
 import { VolunteerUI } from 'src/app/models/ui-modules/volunteerUI.model';
 import { VolunteerUIAdmin } from 'src/app/models/ui-modules/volunteerUIadmin.model';
@@ -46,6 +48,7 @@ export class ViewVolunteerComponent implements OnInit {
       postalAddress: ''
     }
   }
+
   isNewVolunteer = true;
   header = "";
   isAdmin = false;
@@ -70,18 +73,28 @@ export class ViewVolunteerComponent implements OnInit {
         this.volunteerId = params.get('id');
         if (this.volunteerId){
 
+
           // create volunteer
           if (this.volunteerId.toLowerCase() === 'Add'.toLowerCase())
           {
-
+            this.isAdmin = true;
             this.isNewVolunteer = true;
             this.header = "Add new Volunteer";
+
+            this.genderService.getGenderList()
+          .subscribe(
+            (succesResponse) => {
+              this.genderList = succesResponse;
+            }
+          )
           }
           //display existing volunteer by id  for nonAdmin( the route does not contain the keyword add)
           else if (this.isAdmin === false)
           {
             this.isNewVolunteer = false;
             this.header = "Volunteer Details";
+
+
 
             this.volunteerService.getVolunteer(this.volunteerId)
           .subscribe(
@@ -129,7 +142,7 @@ export class ViewVolunteerComponent implements OnInit {
 
   }
   onUpdate(): void{
-    this.volunteerService.updateVolunteer(this.volunteer.id, this.volunteer)
+    this.volunteerService.updateVolunteer(this.volunteerAdmin.id, this.volunteerAdmin)
     .subscribe(
       (succesResponse) => {
           this.snackbar.open('Volunteer updated successfully!', undefined, {
@@ -145,15 +158,15 @@ export class ViewVolunteerComponent implements OnInit {
 
   onDelete(): void{
 
-    this.volunteerService.deleteVolunteer(this.volunteer.id)
+    this.volunteerService.deleteVolunteer(this.volunteerAdmin.id)
     .subscribe(
       (succesResponse) => {
         this.snackbar.open('Volunteer deleted!', undefined, {
           duration: 2000
         });
         setTimeout(() => {
-          this.router.navigateByUrl('volunteers');
-        }, 2000);``
+          this.router.navigateByUrl('volunteers/admin');
+        }, 2000);
 
       },
       (errorResponse) => {
@@ -161,9 +174,22 @@ export class ViewVolunteerComponent implements OnInit {
       }
     )
 
+
   }
-  // onAdd(): void{
-  //   this.volunteerService.addVolunteer(this.volunteer)
-  // }
+  onAdd(): void{
+    this.volunteerService.addVolunteer(this.volunteerAdmin)
+    .subscribe(
+      (succesResponse) => {
+        this.snackbar.open('Volunteer added successfully!', undefined, {
+          duration: 2000
+        });
+        setTimeout(() => {
+          this.router.navigateByUrl(`volunteers/admin/${succesResponse.id}`);
+        }, 2000);
+        console.log(succesResponse);
+      }
+    )
+  }
+
 
 }

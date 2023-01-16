@@ -7,6 +7,7 @@ import { VolunteerUI } from '../models/ui-modules/volunteerUI.model';
 import { addVolunteer } from '../models/api-models/add-volunteer.model';
 import { addVolunteerUI } from '../models/ui-modules/add-volunteer.model';
 import { VolunteerAdmin } from '../models/api-models/volunteerAdmin.model';
+import { VolunteerUIAdmin } from '../models/ui-modules/volunteerUIadmin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class VolunteerService {
   getVolunteerAdmin(volunteerId: string): Observable<VolunteerAdmin>{
     return this.httpClient.get<VolunteerAdmin>(this.baseApiUrl + '/volunteers/admin/' + volunteerId)
   }
-  updateVolunteer(volunteerId: string, volunteerRequest: VolunteerUI): Observable<Volunteer>{
+  updateVolunteer(volunteerId: string, volunteerRequest: VolunteerUIAdmin): Observable<Volunteer>{
     const updateVolunteer: updateVolunteer = {
       firstName: volunteerRequest.firstName,
       lastName: volunteerRequest.lastName,
@@ -34,24 +35,26 @@ export class VolunteerService {
       email: volunteerRequest.email,
       phoneNumber: volunteerRequest.phoneNumber,
       genderId: volunteerRequest.gender.id,
-      profileImageUrl: volunteerRequest.profileImageUrl
+      profileImageUrl: volunteerRequest.profileImageUrl,
+      physicalAddress: volunteerRequest.address.physicalAddress,
+      postalAddress: volunteerRequest.address.postalAddress
     };
     return this.httpClient.put<Volunteer>(this.baseApiUrl + '/volunteers/' + volunteerId, updateVolunteer);
   };
   deleteVolunteer(volunteerId: string): Observable<Volunteer>{
     return this.httpClient.delete<Volunteer>(this.baseApiUrl + '/volunteers/' + volunteerId);
   }
-  addVolunteer(addVolunteer: addVolunteerUI): Observable<Volunteer>{
+  addVolunteer(addVolunteer: VolunteerUIAdmin): Observable<Volunteer>{
     const newVolunteer: addVolunteer = {
       firstName: addVolunteer.firstName,
       lastName: addVolunteer.lastName,
       dateOfBirth: addVolunteer.dateOfBirth,
       email: addVolunteer.email,
       phoneNumber: addVolunteer.phoneNumber,
-      genderId: addVolunteer.genderId,
+      genderId: addVolunteer.gender.id,
       profileImageUrl: addVolunteer.profileImageUrl,
-      physicalAddress: addVolunteer.physicalAddress,
-      postalAddress: addVolunteer.postalAddress
+      physicalAddress: addVolunteer.address.physicalAddress,
+      postalAddress: addVolunteer.address.postalAddress
     };
     return this.httpClient.post<Volunteer>(this.baseApiUrl + '/volunteers/Add', newVolunteer);
 

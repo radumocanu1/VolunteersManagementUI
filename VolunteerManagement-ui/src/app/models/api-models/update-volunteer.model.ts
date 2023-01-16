@@ -6,4 +6,6 @@ export interface updateVolunteer{
   profileImageUrl: string,
   phoneNumber: string,
   genderId: string,
+  physicalAddress: string,
+  postalAddress: string
 }
