@@ -9,10 +9,13 @@
   <div class="row end-xs mt-2">
     <div class="col-xs-12">
       <input type="text" class="search-input" placeholder="Search Volunteer" [(ngModel)]="filterString" (keyup) = "filterVolunteers()">
-
+      <a routerLink="/volunteers/add" mat-raised-button color="primary" class="ml-1" *ngIf="isAdmin">Add new Volunteer</a>
+      <a routerLink="/volunteers/admin" mat-raised-button color="warn" class="ml-1" *ngIf="!isAdmin">I am admin</a>
     </div>
   </div>
-  <div class = "mat-elevation-z8">
+
+
+  <div class = "mt-1 mat-elevation-z8">
     <table mat-table matSort [dataSource]="dataSource" class="">
 
       <!--- Note that these columns can be defined in any order.
@@ -49,10 +52,19 @@
         <td mat-cell *matCellDef="let element"> {{element.gender.description}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="edit">
+      <ng-container matColumnDef="edit" *ngIf="!isAdmin">
         <th mat-header-cell *matHeaderCellDef>   </th>
         <td mat-cell *matCellDef="let element">
           <a [routerLink] = "['/volunteers', element.id]">
+            <mat-icon color="accent">format_list_bulleted</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit" *ngIf="isAdmin">
+        <th mat-header-cell *matHeaderCellDef>   </th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink] = "['/volunteers/admin', element.id]">
             <mat-icon color="accent">edit</mat-icon>
           </a>
         </td>

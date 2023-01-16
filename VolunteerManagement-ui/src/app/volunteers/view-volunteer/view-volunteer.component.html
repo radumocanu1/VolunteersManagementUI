@@ -1,15 +1,21 @@
 
 <div class="page-header">
   <div class="container">
-    <h1>Volunteer Details</h1>
+    <h1>{{header}}</h1>
   </div>
 </div>
 
 
-<div class="container">
-  <div class="row top-row">
-    <div class="col-xs-12 row end-xs" >
+<div class="container" >
+  <div class="row top-row" >
+    <div class="col-xs-12 row end-xs" *ngIf="!isAdmin">
       <a routerLink="/volunteers" color="primary" mat-raised-button>
+        <mat-icon>chevron_left</mat-icon>
+        Go Back
+      </a>
+    </div>
+    <div class="col-xs-12 row end-xs" *ngIf="isAdmin">
+      <a routerLink="/volunteers/admin" color="primary" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
         Go Back
       </a>
@@ -20,83 +26,194 @@
       <form #studentDetailsForm="ngForm">
 
 
-
-        <div class="row">
-          <div class="col-xs-6">
-            <mat-form-field  class="field" appearance="outline">
-              <mat-label> First Name </mat-label>
-              <input type="text" matInput [(ngModel)] = "volunteer.firstName" name="firstName">
-            </mat-form-field>
-          </div>
-
-
-          <div class="col-xs-6">
-            <mat-form-field class="field" appearance="outline">
-              <mat-label> Last Name </mat-label>
-              <input type="text" matInput matInput [(ngModel)] = "volunteer.lastName" name="lastName">
-            </mat-form-field>
-          </div>
-        </div>
+ <div class="checkAdmin" *ngIf="!isAdmin">
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field  class="field" appearance="outline">
+        <mat-label> First Name </mat-label>
+        <input type="text" matInput [(ngModel)] = "volunteer.firstName" name="firstName">
+      </mat-form-field>
+    </div>
 
 
-
-        <div class="row">
-          <div class="col-xs-12">
-            <mat-form-field class="field" appearance="outline">
-              <mat-label> Date of birth </mat-label>
-              <input  matInput [matDatepicker]="picker" matInput [(ngModel)] = "volunteer.dateOfBirth" name="dateOfBirth">
-              <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-6">
-            <mat-form-field class="field" appearance="outline">
-              <mat-label> Email </mat-label>
-              <input type="text" matInput matInput [(ngModel)] = "volunteer.email" name="email">
-            </mat-form-field>
-          </div>
-
-          <div class="col-xs-6">
-            <mat-form-field class="field" appearance="outline">
-              <mat-label> PhoneNumber </mat-label>
-              <input type="text" matInput matInput [(ngModel)] = "volunteer.phoneNumber" name="phoneNumber">
-            </mat-form-field>
-          </div>
+    <div class="col-xs-6">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Last Name </mat-label>
+        <input type="text" matInput matInput [(ngModel)] = "volunteer.lastName" name="lastName">
+      </mat-form-field>
+    </div>
+  </div>
 
 
 
+  <div class="row">
+    <div class="col-xs-12">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Date of birth </mat-label>
+        <input  matInput [matDatepicker]="picker" matInput [(ngModel)] = "volunteer.dateOfBirth" name="dateOfBirth">
+        <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Email </mat-label>
+        <input type="text" matInput matInput [(ngModel)] = "volunteer.email" name="email">
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-6">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> PhoneNumber </mat-label>
+        <input type="text" matInput matInput [(ngModel)] = "volunteer.phoneNumber" name="phoneNumber">
+      </mat-form-field>
+    </div>
 
 
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <mat-form-field class="field" appearance="outline">
-              <mat-label> Gender </mat-label>
-              <mat-select [(ngModel)] = "volunteer.gender.id" name="gender">
-                <mat-option *ngFor=" let gender of genderList" [value]="gender.id">
-                  {{gender.description}}
 
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <button mat-raised-button color ="primary" (click)="onUpdate()">Update Volunteer</button>
-          </div>
-        </div>
+
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Gender </mat-label>
+        <mat-select [(ngModel)] = "volunteer.gender.id" name="gender">
+          <mat-option *ngFor=" let gender of genderList" [value]="gender.id">
+            {{gender.description}}
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row between-xs" *ngIf="!isNewVolunteer">
+        <button mat-raised-button color ="primary" (click)="onUpdate()">Update Volunteer</button>
+        <button mat-raised-button color ="warn" (click)="onDelete()">Delete Volunteer</button>
+      </div>
+
+    </div>
+    <div class="col-xs-12">
+      <div class="row between-xs" *ngIf="isNewVolunteer">
+        <button mat-raised-button color ="primary" >Add Volunteer</button>
+      </div>
+
+    </div>
+  </div>
+
+ </div>
+ <div class="checkAdmin" *ngIf="isAdmin">
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field  class="field" appearance="outline">
+        <mat-label> First Name </mat-label>
+        <input type="text" matInput [(ngModel)] = "volunteerAdmin.firstName" name="firstName">
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-xs-6">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Last Name </mat-label>
+        <input type="text" matInput matInput [(ngModel)] = "volunteerAdmin.lastName" name="lastName">
+      </mat-form-field>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Date of birth </mat-label>
+        <input  matInput [matDatepicker]="picker" matInput [(ngModel)] = "volunteerAdmin.dateOfBirth" name="dateOfBirth">
+        <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Email </mat-label>
+        <input type="text" matInput matInput [(ngModel)] = "volunteerAdmin.email" name="email">
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-6">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> PhoneNumber </mat-label>
+        <input type="text" matInput matInput [(ngModel)] = "volunteerAdmin.phoneNumber" name="phoneNumber">
+      </mat-form-field>
+    </div>
+
+
+
+
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Gender </mat-label>
+        <mat-select [(ngModel)] = "volunteerAdmin.gender.id" name="gender">
+          <mat-option *ngFor=" let gender of genderList" [value]="gender.id">
+            {{gender.description}}
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Physical Address </mat-label>
+        <textarea matInput [(ngModel)] = "volunteerAdmin.address.physicalAddress" name="physicalAddress"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-12">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label> Postal Address </mat-label>
+        <textarea matInput matInput [(ngModel)] = "volunteerAdmin.address.postalAddress" name="postalAddress"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row between-xs" *ngIf="!isNewVolunteer">
+        <button mat-raised-button color ="primary" (click)="onUpdate()">Update Volunteer</button>
+        <button mat-raised-button color ="warn" (click)="onDelete()">Delete Volunteer</button>
+      </div>
+
+    </div>
+    <div class="col-xs-12">
+      <div class="row between-xs" *ngIf="isNewVolunteer">
+        <button mat-raised-button color ="primary" >Add Volunteer</button>
+      </div>
+
+    </div>
+  </div>
+
+ </div>
+
       </form>
     </div>
 
 
-
-    <div class="col-xs-6">
-
-    </div>
 
   </div>
 </div>

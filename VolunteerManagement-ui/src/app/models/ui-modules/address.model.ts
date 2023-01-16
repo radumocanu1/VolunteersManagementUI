@@ -1,6 +1,5 @@
 export interface Address{
   id: string,
   physicalAddress: string,
-  postalAddress: string,
-  volunteerId: string
+  postalAddress: string
 }

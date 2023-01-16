@@ -13,9 +13,18 @@ const routes: Routes = [
     component: VolunteersComponent
   },
   {
+    path: 'volunteers/admin',
+    component: VolunteersComponent
+  },
+  {
     path: 'volunteers/:id',
     component: ViewVolunteerComponent
-  }
+  },
+  {
+    path: 'volunteers/admin/:id',
+    component: ViewVolunteerComponent
+  },
+
 ];
 
 @NgModule({
