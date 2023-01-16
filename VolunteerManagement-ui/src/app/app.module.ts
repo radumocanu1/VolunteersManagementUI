@@ -53,13 +53,15 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
+import { ViewMainComponent } from './layout/mainPage/view-main/view-main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
     VolunteersComponent,
-    ViewVolunteerComponent
+    ViewVolunteerComponent,
+    ViewMainComponent
   ],
   imports: [
     FormsModule,

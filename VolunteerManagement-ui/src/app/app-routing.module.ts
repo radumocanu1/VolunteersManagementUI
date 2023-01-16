@@ -1,12 +1,13 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ViewMainComponent } from './layout/mainPage/view-main/view-main.component';
 import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: VolunteersComponent
+    component: ViewMainComponent
   },
   {
     path: 'volunteers',
