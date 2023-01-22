@@ -54,16 +54,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 import { ViewMainComponent } from './layout/mainPage/view-main/view-main.component';
-
+import { LoginReactiveFormsComponent } from './login/login-reactive-forms/login-reactive-forms.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
     VolunteersComponent,
     ViewVolunteerComponent,
-    ViewMainComponent
+    ViewMainComponent,
+    LoginReactiveFormsComponent
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

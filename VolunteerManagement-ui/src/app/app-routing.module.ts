@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewMainComponent } from './layout/mainPage/view-main/view-main.component';
+import { LoginReactiveFormsComponent } from './login/login-reactive-forms/login-reactive-forms.component';
 import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 
@@ -25,6 +26,10 @@ const routes: Routes = [
     path: 'volunteers/admin/:id',
     component: ViewVolunteerComponent
   },
+  {
+    path: 'user/authentificate',
+    component: LoginReactiveFormsComponent
+  }
 
 ];
 
