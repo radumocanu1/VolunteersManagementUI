@@ -2,6 +2,8 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewMainComponent } from './layout/mainPage/view-main/view-main.component';
 import { LoginReactiveFormsComponent } from './login/login-reactive-forms/login-reactive-forms.component';
+import { AuthGuard } from './services/guard/auth.guard';
+import { AuthService } from './services/guard/auth.service';
 import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 
@@ -16,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'volunteers/admin',
-    component: VolunteersComponent
+    component: VolunteersComponent,
+    canActivate:[AuthGuard],
   },
   {
     path: 'volunteers/:id',
@@ -24,7 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'volunteers/admin/:id',
-    component: ViewVolunteerComponent
+    component: ViewVolunteerComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'user/authentificate',
