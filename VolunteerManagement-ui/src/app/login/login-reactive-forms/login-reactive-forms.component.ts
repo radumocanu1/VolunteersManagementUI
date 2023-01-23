@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserUI } from 'src/app/models/ui-modules/user-model';
+import { Roles } from 'src/app/models/api-models/roles-model';
 
 @Component({
   selector: 'app-login-reactive-forms',
@@ -16,12 +17,14 @@ export class LoginReactiveFormsComponent implements OnInit {
     id: '',
     email: '',
     token: '',
-    username: ''
+    username: '',
+    role: Roles.User
   }
 
   constructor(private loginService : LoginService,
     private readonly route: ActivatedRoute,
-    private snackbar: MatSnackBar){}
+    private snackbar: MatSnackBar,
+    private readonly router: Router){}
 
   ngOnInit(): void {
 
@@ -46,9 +49,15 @@ export class LoginReactiveFormsComponent implements OnInit {
           duration: 2000
         });
         this.currentUser = successResponse;
-        console.log(this.currentUser.token);
+        localStorage.setItem('token', this.currentUser.token);
+        if (this.currentUser.role === Roles.Admin)
+        {
+          localStorage.setItem('role', 'admin');
+        }
+        this.router.navigateByUrl('volunteers/admin')
       },
       (errorResponse) => {
+        localStorage.setItem('token', '')
         this.snackbar.open('Credentials are incorrect!', undefined, {
           duration: 2000
         });
