@@ -24,3 +24,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.selectorLogin{
+  background-image: url("C:\Users\radum\VolunteersManagement\VolunteersManagementUI\VolunteersManagementUI\VolunteerManagement-ui\src\app\login\login-reactive-forms\login-otp-banner.webp");
+  background-position: center;
+  height: 80%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.selectorAbout{
+  background-color: blueviolet;
+}

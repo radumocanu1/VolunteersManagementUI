@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { Roles } from 'src/app/models/api-models/roles-model';
   templateUrl: './login-reactive-forms.component.html',
   styleUrls: ['./login-reactive-forms.component.css']
 })
-export class LoginReactiveFormsComponent implements OnInit {
+export class LoginReactiveFormsComponent implements OnInit{
 
   currentUser: UserUI = {
     id: '',
@@ -20,6 +20,8 @@ export class LoginReactiveFormsComponent implements OnInit {
     username: '',
     role: Roles.User
   }
+  renderer: any;
+  el: any;
 
   constructor(private loginService : LoginService,
     private readonly route: ActivatedRoute,
@@ -28,8 +30,12 @@ export class LoginReactiveFormsComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    document.body.className = "selectorLogin";
   }
+ngOnDestroy(){
+    document.body.className="";
+  }
+
   loginForm = new FormGroup(
     {
       user:new FormControl(''),
@@ -50,11 +56,19 @@ export class LoginReactiveFormsComponent implements OnInit {
         });
         this.currentUser = successResponse;
         localStorage.setItem('token', this.currentUser.token);
-        if (this.currentUser.role === Roles.Admin)
+        console.log(this.currentUser.role);
+        if (this.currentUser.role === 1)
         {
+          console.log("admin")
           localStorage.setItem('role', 'admin');
+          this.router.navigateByUrl('volunteers/admin');
         }
-        this.router.navigateByUrl('volunteers/admin')
+        else
+        {
+          localStorage.setItem('role', 'user');
+          this.router.navigateByUrl('volunteers');
+        }
+
       },
       (errorResponse) => {
         localStorage.setItem('token', '')

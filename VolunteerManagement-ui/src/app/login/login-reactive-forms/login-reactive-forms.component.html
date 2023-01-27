@@ -1,4 +1,14 @@
-<h1>Login as admin</h1>
+<h1>Login as admin or user</h1>
+
+<div class="row top-row" >
+  <div class="col-xs-12 row end-xs">
+    <a routerLink="" color="primary" mat-raised-button>
+      <mat-icon>chevron_left</mat-icon>
+      Go Back
+    </a>
+  </div>
+</div>
+
 <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
   <input type="text" color="accent" style="width: 20em ; height: 5em; margin-top: 5em; margin-right: 90%; margin-left: 20px;" placeholder="enter username" formControlName="user">
   <br> <br>

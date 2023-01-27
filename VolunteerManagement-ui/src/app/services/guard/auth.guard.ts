@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     {
       return true;
     }
-   alert("You are not logged in as an admin!");
+   alert("You Don't Have Permission to Access this page");
     this.route.navigateByUrl('user/authentificate');
     return false;
   }

@@ -56,6 +56,8 @@ import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunte
 import { ViewMainComponent } from './layout/mainPage/view-main/view-main.component';
 import { LoginReactiveFormsComponent } from './login/login-reactive-forms/login-reactive-forms.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AboutUsComponent } from './layout/about-us/about-us.component';
+import { RegisterUserComponent } from './login/register-user/register-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +65,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     VolunteersComponent,
     ViewVolunteerComponent,
     ViewMainComponent,
-    LoginReactiveFormsComponent
+    LoginReactiveFormsComponent,
+    AboutUsComponent,
+    RegisterUserComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -9,7 +9,7 @@ import { Roles } from 'src/app/models/api-models/roles-model';
 export class RoleGuard implements CanActivate {
   canActivate()
   {
-    if (localStorage.getItem('role') === 'Admin')
+    if (localStorage.getItem('role') === 'admin')
     {
       return true;
     }
