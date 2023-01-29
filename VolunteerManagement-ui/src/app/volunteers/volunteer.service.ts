@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Volunteer } from '../models/api-models/volunteer.model';
 import { updateVolunteer } from '../models/api-models/update-volunteer.model';
@@ -39,7 +39,9 @@ export class VolunteerService {
       physicalAddress: volunteerRequest.address.physicalAddress,
       postalAddress: volunteerRequest.address.postalAddress
     };
-    return this.httpClient.put<Volunteer>(this.baseApiUrl + '/volunteers/' + volunteerId, updateVolunteer);
+    let headers = new HttpHeaders()
+    headers=headers.append('Authorization', localStorage.getItem('token')!);
+    return this.httpClient.put<Volunteer>(this.baseApiUrl + '/volunteers/' + volunteerId, updateVolunteer, { 'headers': headers });
   };
   deleteVolunteer(volunteerId: string): Observable<Volunteer>{
     return this.httpClient.delete<Volunteer>(this.baseApiUrl + '/volunteers/' + volunteerId);

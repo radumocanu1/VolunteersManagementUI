@@ -7,6 +7,12 @@
       Go Back
     </a>
   </div>
+  <div class="col-xs-12 row end-xs">
+    <a color="primary" mat-raised-button style="margin-top: 2em;" (click)="signOut()">
+      <mat-icon>assignment_ind</mat-icon>
+      Log out
+    </a>
+  </div>
 </div>
 
 <form [formGroup]="loginForm" (ngSubmit)="onLogin()">

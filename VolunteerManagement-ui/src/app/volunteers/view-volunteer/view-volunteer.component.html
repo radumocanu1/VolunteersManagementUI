@@ -213,6 +213,9 @@
  </div>
 
       </form>
+      <div class="row between-xs" style="margin: 2em;" *ngIf="!isNewVolunteer">
+        <button mat-raised-button color ="primary"  [routerLink] = "['/tasks', volunteerId]">Show current tasks</button>
+      </div>
     </div>
 
 

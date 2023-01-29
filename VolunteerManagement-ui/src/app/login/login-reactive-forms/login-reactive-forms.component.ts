@@ -79,5 +79,10 @@ ngOnDestroy(){
     )
 
   }
-
+  signOut(){
+    localStorage.clear();
+    this.snackbar.open('You have logged out!', undefined, {
+      duration: 2000
+    });
+  }
 }

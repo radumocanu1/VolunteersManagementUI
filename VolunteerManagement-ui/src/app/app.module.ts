@@ -58,6 +58,7 @@ import { LoginReactiveFormsComponent } from './login/login-reactive-forms/login-
 import { ReactiveFormsModule } from '@angular/forms';
 import { AboutUsComponent } from './layout/about-us/about-us.component';
 import { RegisterUserComponent } from './login/register-user/register-user.component';
+import { ViewTasksComponent } from './tasks/view-tasks/view-tasks.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,8 @@ import { RegisterUserComponent } from './login/register-user/register-user.compo
     ViewMainComponent,
     LoginReactiveFormsComponent,
     AboutUsComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    ViewTasksComponent
   ],
   imports: [
     ReactiveFormsModule,
