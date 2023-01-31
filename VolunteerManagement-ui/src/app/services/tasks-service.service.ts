@@ -16,4 +16,7 @@ export class TasksServiceService {
   getTasks(volunteerID : String): Observable<Task[]>{
     return this.httpClient.get<Task[]>(this.baseApiUrl + '/Volunteers/tasks/' + volunteerID)
   }
+  getAllTasks(): Observable<Task[]> {
+    return this.httpClient.get<Task[]>((this.baseApiUrl) + '/ToDo');
+  }
 }

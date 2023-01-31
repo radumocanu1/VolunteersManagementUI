@@ -7,6 +7,7 @@ import { RegisterUserComponent } from './login/register-user/register-user.compo
 import { AuthGuard } from './services/guard/auth.guard';
 import { AuthService } from './services/guard/auth.service';
 import { RoleGuard } from './services/guard/role.guard';
+import { AllTasksComponent } from './tasks/all-tasks/all-tasks.component';
 import { ViewTasksComponent } from './tasks/view-tasks/view-tasks.component';
 import { ViewVolunteerComponent } from './volunteers/view-volunteer/view-volunteer.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
@@ -50,7 +51,13 @@ const routes: Routes = [
   },
   {
     path: 'tasks/:id',
-    component: ViewTasksComponent
+    component: ViewTasksComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'tasks',
+    component: AllTasksComponent,
+    canActivate:[AuthGuard]
   }
 
 ];
